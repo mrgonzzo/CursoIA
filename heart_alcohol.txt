@@ -1,0 +1,43 @@
+Dataset 'wine' cargado exitosamente.
+
+==================================================
+           RESULTADOS DE LA REGRESIÓN MCO
+    Variable Dependiente: Muertes por Enfermedad Cardíaca (heart)
+    Variable Independiente: Consumo de Alcohol de Vino (alcohol)
+==================================================
+
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  heart   R-squared:                       0.437
+Model:                            OLS   Adj. R-squared:                  0.408
+Method:                 Least Squares   F-statistic:                     14.77
+Date:                Tue, 07 Oct 2025   Prob (F-statistic):            0.00110
+Time:                        18:52:27   Log-Likelihood:                -113.39
+No. Observations:                  21   AIC:                             230.8
+Df Residuals:                      19   BIC:                             232.9
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept    239.1467     19.032     12.565      0.000     199.312     278.981
+alcohol      -19.6826      5.121     -3.843      0.001     -30.402      -8.963
+==============================================================================
+Omnibus:                       13.128   Durbin-Watson:                   2.105
+Prob(Omnibus):                  0.001   Jarque-Bera (JB):               13.020
+Skew:                          -1.243   Prob(JB):                      0.00149
+Kurtosis:                       5.950   Cond. No.                         6.01
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
+==================================================
+INTERPRETACIÓN CLAVE:
+Coeficiente de 'alcohol': -19.6826
+P-valor asociado: 0.0011
+La relación entre el consumo de alcohol de vino y las muertes cardíacas es estadísticamente significativo al 5%.
+Un coeficiente negativo sugiere que un mayor consumo se asocia con menos muertes cardíacas.
+==================================================
+
+Process finished with exit code 0

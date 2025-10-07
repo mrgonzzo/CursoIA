@@ -49,5 +49,5 @@ print(f"\nDimensiones: {mroz.shape}")
 # ============================================
 # 4. EJERCICIO PRÁCTICO - Modelo completo
 # ============================================
-mod_mcoT = ols('lwage ~ inlf + hours + kidslt6 + kidsge6 + age + educ + wage + repwage + hushrs + husage + huseduc + huswage + faminc + mtr + motheduc + fatheduc + unem + city + exper + nwifeinc + lwage + expersq', data=mroz).fit()
+mod_mcoT = ols('lwage ~ nwifeinc + educ + I(educ**2) +  exper +  age + kidslt6 + kidsge6', data=mroz).fit()
 print(mod_mcoT.summary())

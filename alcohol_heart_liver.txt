@@ -1,0 +1,50 @@
+Dataset 'wine' cargado exitosamente.
+
+======================================================================
+      RESULTADOS DE LA REGRESIÓN LINEAL MÚLTIPLE (MCO)
+    Variable Dependiente: Consumo de Alcohol de Vino (alcohol)
+    Variables Independientes: Muertes Cardíacas (heart) y Hepáticas (liver)
+======================================================================
+
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                alcohol   R-squared:                       0.614
+Model:                            OLS   Adj. R-squared:                  0.571
+Method:                 Least Squares   F-statistic:                     14.30
+Date:                Tue, 07 Oct 2025   Prob (F-statistic):           0.000191
+Time:                        19:05:38   Log-Likelihood:                -38.184
+No. Observations:                  21   AIC:                             82.37
+Df Residuals:                      18   BIC:                             85.50
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept      2.6067      1.786      1.459      0.162      -1.146       6.360
+heart         -0.0113      0.006     -1.810      0.087      -0.024       0.002
+liver          0.1093      0.038      2.867      0.010       0.029       0.189
+==============================================================================
+Omnibus:                        0.114   Durbin-Watson:                   2.423
+Prob(Omnibus):                  0.945   Jarque-Bera (JB):                0.035
+Skew:                          -0.006   Prob(JB):                        0.983
+Kurtosis:                       2.801   Cond. No.                     1.00e+03
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large,  1e+03. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
+======================================================================
+INTERPRETACIÓN CLAVE:
+Coeficiente de 'heart': -0.0113
+Coeficiente de 'liver': 0.1093
+R-cuadrado del modelo: 0.6138
+
+Interpretación:
+- El coeficiente de 'heart' (-0.0113) indica el cambio en el consumo de alcohol cuando la tasa de muertes cardíacas aumenta en 1, 
+  MANTENIENDO CONSTANTE la tasa de muertes hepáticas.
+- El R-cuadrado (0.6138) sugiere que este porcentaje de la variación total en el consumo de alcohol es explicado conjuntamente por ambas tasas de mortalidad.
+======================================================================
+
+Process finished with exit code 0

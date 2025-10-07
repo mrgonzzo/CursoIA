@@ -1,0 +1,53 @@
+Aplicar MCO (Mínimos Cuadrados Ordinarios) al dataset wine en Python es un proceso directo, comúnmente realizado con la librería statsmodels.
+
+El objetivo habitual es analizar la relación entre el consumo de alcohol de vino (alcohol) y una de las tasas de mortalidad, 
+como las muertes por enfermedad cardíaca (heart) o hepática (liver).
+
+Aquí te explico cómo aplicar MCO para estimar el impacto de alcohol sobre heart.
+
+1. Importar Librerías y Datos 🍷
+
+Necesitas pandas para manejar los datos, wooldridge para cargarlos y statsmodels.formula.api para la regresión.
+Python
+
+import pandas as pd
+import statsmodels.formula.api as smf
+import wooldridge
+
+# Cargar el dataset 'wine'
+df = wooldridge.data('wine')
+
+2. Aplicar MCO (Regresión Lineal Simple) 📈
+
+Utilizaremos la sintaxis de fórmula de statsmodels, donde la ecuación se define como VariableDependiente ~ VariableIndependiente.
+
+Modelo a Estimar: 
+heart=β0​+β1​⋅alcohol+u
+Python
+
+# Definir la fórmula del modelo
+formula = 'heart ~ alcohol'
+
+# Aplicar MCO: OLS (Ordinary Least Squares)
+modelo_mco = smf.ols(formula, data=df)
+
+# Entrenar el modelo
+resultados = modelo_mco.fit()
+
+3. Mostrar e Interpretar los Resultados 📋
+
+El método .summary() proporciona la tabla de resultados econométricos completa.
+Python
+
+# Mostrar el resumen de los resultados
+print(resultados.summary())
+
+Interpretación Clave (Basada en la práctica común):
+
+    Coeficiente de alcohol (β1​): El valor te indicará si, por cada litro adicional de alcohol de vino consumido per cápita, el número de muertes por enfermedad cardíaca por 100,000 personas aumenta (si es positivo) o disminuye (si es negativo).
+
+    P-valor (P>|t|): Si este valor es menor que 0.05 (o el nivel de significancia elegido), el efecto se considera estadísticamente significativo.
+
+    R-cuadrado: Mide el porcentaje de la variación total en la tasa de muertes cardíacas que es explicada por el consumo de alcohol de vino.
+
+    💡 Consejo Adicional: Para analizar el otro lado de la "paradoja del vino" (efecto negativo en el hígado), simplemente cambia la variable dependiente a liver: formula = 'liver ~ alcohol'.

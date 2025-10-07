@@ -1,0 +1,43 @@
+Dataset 'wine' cargado exitosamente.
+
+==================================================
+           RESULTADOS DE LA REGRESIÓN MCO
+    Variable Dependiente: Consumo de Alcohol de Vino (alcohol)
+    Variable Independiente: Muertes por Enfermedad Cardíaca (heart)
+==================================================
+
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                alcohol   R-squared:                       0.437
+Model:                            OLS   Adj. R-squared:                  0.408
+Method:                 Least Squares   F-statistic:                     14.77
+Date:                Tue, 07 Oct 2025   Prob (F-statistic):            0.00110
+Time:                        19:01:40   Log-Likelihood:                -42.134
+No. Observations:                  21   AIC:                             88.27
+Df Residuals:                      19   BIC:                             90.36
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept      6.9109      1.137      6.076      0.000       4.530       9.291
+heart         -0.0222      0.006     -3.843      0.001      -0.034      -0.010
+==============================================================================
+Omnibus:                        2.020   Durbin-Watson:                   2.797
+Prob(Omnibus):                  0.364   Jarque-Bera (JB):                0.624
+Skew:                          -0.161   Prob(JB):                        0.732
+Kurtosis:                       3.780   Cond. No.                         542.
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
+==================================================
+INTERPRETACIÓN CLAVE:
+Coeficiente de 'heart': -0.0222
+P-valor asociado: 0.0011
+Interpretación: Un aumento de 1 en la tasa de muertes cardíacas se asocia con un cambio de
+-0.0222 litros en el consumo per cápita de alcohol de vino.
+==================================================
+
+Process finished with exit code 0
