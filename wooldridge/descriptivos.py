@@ -65,4 +65,4 @@ def analizar_dataset(nombre_dataset):
 
 
 # CAMBIAR SOLO ESTA LÍNEA:
-df = analizar_dataset('wage1')
+df = analizar_dataset('mroz')
