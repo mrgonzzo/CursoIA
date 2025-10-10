@@ -1,0 +1,59 @@
+import pandas as pd
+import os
+from os.path import abspath, join, split
+
+lst = []
+lst = ["401k" ,"alcohol" ,"attend" ,"beveridge" ,"card" ,"ceosal2" ,"cps78_85" ,"crime4" ,"elem94_95" ,"fair" ,"fringe" ,"hprice1" ,"infmrt" ,"jtrain" ,"loanapp" ,"meap93" ,"murder" ,"pension" ,"rdchem" ,"saving" ,"traffic2" ,"voucher" ,"wine" ,"401ksubs" ,"apple" ,"audit" ,"big9salary" ,"catholic" ,"charity" ,"cps91" ,"discrim" ,"engin" ,"fertil1" ,"gpa1" ,"hprice2" ,"injury" ,"jtrain2" ,"lowbrth" ,"meapsingle" ,"nbasal" ,"phillips" ,"rdtelec" ,"sleep75" ,"twoyear" ,"wage1" ,"admnrev" ,"approval" ,"barium" ,"bwght" ,"cement" ,"consump" ,"crime1" ,"driving" ,"expendshares" ,"fertil2" ,"gpa2" ,"hprice3" ,"intdef" ,"jtrain3" ,"mathpnl" ,"minwage" ,"nyse" ,"pntsprd" ,"recid" ,"slp75_81" ,"volat" ,"wage2" ,"affairs" ,"athlet1" ,"beauty" ,"bwght2" ,"census2000" ,"corn" ,"crime2" ,"earns" ,"ezanders" ,"fertil3" ,"gpa3" ,"hseinv" ,"intqrt" ,"kielmc" ,"meap00_01" ,"mlb1" ,"okun" ,"prison" ,"rental" ,"smoke" ,"vote1" ,"wagepan" ,"airfare" ,"athlet2" ,"benefits" ,"campus" ,"ceosal1" ,"countymurders" ,"crime3" ,"econmath" ,"ezunem" ,"fish" ,"happiness" ,"htv" ,"inven" ,"lawsch85" ,"meap01" ,"mroz" ,"openness" ,"prminwge" ,"return" ,"traffic1" ,"vote2" ,"wageprc"]
+
+
+def _get_path(f):
+    return split(abspath(f))[0]
+
+
+def _find_full_file_path(path, dataset_to_open):
+    """
+    parameters:
+        path: the folder of`py4macro.py`
+        dataset_to_open: dataset to open
+
+    return:
+        a full file path of `dataset_to_open` including its file name"""
+
+    for current_folder, sub_folders, _files in os.walk(path):
+        if dataset_to_open in _files:
+            return join(current_folder, dataset_to_open)
+
+
+def data(name=None, description=False):
+
+    if (name != None) & (description == False):
+
+        full_file_path = _find_full_file_path(_get_path(__file__), name+".csv.bz2")
+        return pd.read_csv(full_file_path, compression="bz2")
+
+    elif (name != None) & (description == True):
+
+        full_file_path = _find_full_file_path(_get_path(__file__), name+".txt")
+        with open(full_file_path, 'r', encoding="utf-8") as f:
+            print(f.read())
+
+    elif name == None:
+        print(lst)
+        return lst
+
+def dataWoo(name=None, description=False):
+
+    if (name != None) & (description == False):
+
+        full_file_path = _find_full_file_path(_get_path(__file__), name+".csv.bz2")
+        return pd.read_csv(full_file_path, compression="bz2")
+
+    elif (name != None) & (description == True):
+
+        full_file_path = _find_full_file_path(_get_path(__file__), name+".txt")
+        with open(full_file_path, 'r', encoding="utf-8") as f:
+            print(f.read())
+
+    elif name == None:
+        print(lst)
+        return lst

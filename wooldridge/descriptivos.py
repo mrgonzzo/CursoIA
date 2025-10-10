@@ -65,4 +65,8 @@ def analizar_dataset(nombre_dataset):
 
 
 # CAMBIAR SOLO ESTA LÍNEA:
-df = analizar_dataset('phillips')
+listado_datasets = woo.dataWoo()
+print(f"este es el listado antes de entrar akl bucle: {listado_datasets}")
+for dataset in listado_datasets:
+    print(f"este es el data sel leido en cada iteracion : {dataset}")
+    df = analizar_dataset(dataset)
