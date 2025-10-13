@@ -63,12 +63,12 @@ def analizar_dataset(nombre_dataset):
 
     return df
 
-
+df = analizar_dataset('wage1')
 # CAMBIAR SOLO ESTA LÍNEA:
-listado_datasets = woo.dataWoo()
-
-print(f"¿Cuantos datasets hay en el paquete Wooldridge? \n Hay {len(listado_datasets)} mi señor")
-
-for dataset in listado_datasets:
-     print(f"este es el data sel leido en cada iteracion : {dataset} \n")
-     #df = analizar_dataset(dataset)
+##listado_datasets = woo.dataWoo()
+##
+##print(f"¿Cuantos datasets hay en el paquete Wooldridge? \n Hay {len(listado_datasets)} mi señor")
+##
+##for dataset in listado_datasets:
+##     print(f"este es el data sel leido en cada iteracion : {dataset} \n")
+     #d
