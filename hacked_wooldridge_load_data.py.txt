@@ -55,5 +55,5 @@ def dataWoo(name=None, description=False):
             print(f.read())
 
     elif name == None:
-        print(lst)
+        #print(lst)
         return lst
