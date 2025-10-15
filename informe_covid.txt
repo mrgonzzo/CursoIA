@@ -1,0 +1,107 @@
+======================================================================
+EJERCICIO: Análisis COVID-19 (UCI y Fallecidos)
+======================================================================
+
+🔹 MODELO 1: Ingresos UCI diarios
+======================================================================
+📊 INFORME DEL MODELO: Modelo UCI
+======================================================================
+
+1️⃣ ECUACIÓN ESTIMADA:
+----------------------------------------------------------------------
+Ingresos_UCI_diarios = 52407.9713*const +42.1169*Hay_vacuna +39.6516*Hay_Confinamiento -25.9207*Año 
+
+2️⃣ COEFICIENTES Y SIGNIFICANCIA:
+----------------------------------------------------------------------
+Variable             Coeficiente   P-valor   Significativo?
+----------------------------------------------------------------------
+const                 52407.9713    0.0000         *** (1%)
+Hay_vacuna               42.1169    0.0000         *** (1%)
+Hay_Confinamiento        39.6516    0.0000         *** (1%)
+Año                     -25.9207    0.0000         *** (1%)
+
+Nota: *** = 1%, ** = 5%, * = 10%
+
+3️⃣ BONDAD DE AJUSTE:
+----------------------------------------------------------------------
+R² (R cuadrado)          : 0.0515
+R² Ajustado              : 0.0482
+Número de observaciones  : 874
+
+4️⃣ VERIFICACIÓN DE SUPUESTOS:
+----------------------------------------------------------------------
+
+📌 A) NORMALIDAD DE RESIDUOS (Jarque-Bera)
+   Estadístico: 3278.9084
+   P-valor: 0.0000
+   H0: Los residuos se distribuyen normalmente
+   ❌ Se rechaza H0 (p-valor = 0.0000 < 0.05)
+
+📌 B) HOMOCEDASTICIDAD (Breusch-Pagan)
+   Estadístico: 127.2346
+   P-valor: 0.0000
+   H0: Hay homocedasticidad (varianza constante)
+   ❌ Se rechaza H0 (p-valor = 0.0000 < 0.05)
+
+📌 C) NO AUTOCORRELACIÓN (Breusch-Godfrey)
+   Estadístico: 827.3132
+   P-valor: 0.0000
+   H0: No hay autocorrelación
+   ❌ Se rechaza H0 (p-valor = 0.0000 < 0.05)
+
+5️⃣ GRÁFICOS DE DIAGNÓSTICO:
+----------------------------------------------------------------------
+
+🔹 MODELO 2: Fallecidos diarios
+======================================================================
+📊 INFORME DEL MODELO: Modelo Fallecidos
+======================================================================
+
+1️⃣ ECUACIÓN ESTIMADA:
+----------------------------------------------------------------------
+Fallecidos_diarios = 1407.9597*const +6.0448*Hay_vacuna +200.7842*Hay_Confinamiento -0.6497*Año 
+
+2️⃣ COEFICIENTES Y SIGNIFICANCIA:
+----------------------------------------------------------------------
+Variable             Coeficiente   P-valor   Significativo?
+----------------------------------------------------------------------
+const                  1407.9597    0.9607               NO
+Hay_vacuna                6.0448    0.7747               NO
+Hay_Confinamiento       200.7842    0.0000         *** (1%)
+Año                      -0.6497    0.9634               NO
+
+Nota: *** = 1%, ** = 5%, * = 10%
+
+3️⃣ BONDAD DE AJUSTE:
+----------------------------------------------------------------------
+R² (R cuadrado)          : 0.1608
+R² Ajustado              : 0.1579
+Número de observaciones  : 874
+
+4️⃣ VERIFICACIÓN DE SUPUESTOS:
+----------------------------------------------------------------------
+
+📌 A) NORMALIDAD DE RESIDUOS (Jarque-Bera)
+   Estadístico: 782.4269
+   P-valor: 0.0000
+   H0: Los residuos se distribuyen normalmente
+   ❌ Se rechaza H0 (p-valor = 0.0000 < 0.05)
+
+📌 B) HOMOCEDASTICIDAD (Breusch-Pagan)
+   Estadístico: 210.6746
+   P-valor: 0.0000
+   H0: Hay homocedasticidad (varianza constante)
+   ❌ Se rechaza H0 (p-valor = 0.0000 < 0.05)
+
+📌 C) NO AUTOCORRELACIÓN (Breusch-Godfrey)
+   Estadístico: 851.2033
+   P-valor: 0.0000
+   H0: No hay autocorrelación
+   ❌ Se rechaza H0 (p-valor = 0.0000 < 0.05)
+
+5️⃣ GRÁFICOS DE DIAGNÓSTICO:
+----------------------------------------------------------------------
+
+======================================================================
+✅ INFORME COMPLETO
+======================================================================
