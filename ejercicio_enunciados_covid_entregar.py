@@ -101,6 +101,10 @@ class AnalizadorCovid:
         """
         # TU CÓDIGO AQUÍ
         pass
+        for registro in self.registros:
+            if registro.fecha_num == fecha_num:
+                return registro
+        return None
 
     # =========================================================================
     # EJERCICIO 2: BÚSQUEDA BINARIA
@@ -132,6 +136,22 @@ class AnalizadorCovid:
 
         # TU CÓDIGO AQUÍ - Implementa búsqueda binaria
         pass
+        # Paso 2: búsqueda binaria
+        izquierda = 0
+        derecha = len(registros_ordenados) - 1
+        resultado = None
+
+        while izquierda <= derecha:
+            medio = (izquierda + derecha) // 2
+            if registros_ordenados[medio].fallecidos >= minimo_fallecidos:
+                resultado = registros_ordenados[medio]
+                derecha = medio - 1  # buscar si hay uno anterior que también cumpla
+            else:
+                izquierda = medio + 1
+
+        return resultado.fecha
+
+
 
     # =========================================================================
     # EJERCICIO 3: ORDENAMIENTO BURBUJA (BUBBLE SORT)
@@ -165,6 +185,13 @@ class AnalizadorCovid:
 
         # TU CÓDIGO AQUÍ
         pass
+        for i in range(n):
+            for j in range(0, n - i - 1):
+                if registros_copia[j].ingresos_uci > registros_copia[j + 1].ingresos_uci:
+                    # Intercambiar si están en orden incorrecto
+                    registros_copia[j], registros_copia[j + 1] = registros_copia[j + 1], registros_copia[j]
+
+        return registros_copia
 
     # =========================================================================
     # EJERCICIO 4: ORDENAMIENTO RÁPIDO (QUICKSORT)
@@ -195,7 +222,23 @@ class AnalizadorCovid:
         """
         # TU CÓDIGO AQUÍ
         pass
+        if len(registros) <= 1:
+            return registros
 
+            # Paso 2: elegir pivote (elemento del medio)
+        pivote = registros[len(registros) // 2].fallecidos
+
+        # Paso 3: dividir en tres sublistas
+        mayores = [r for r in registros if r.fallecidos > pivote]
+        iguales = [r for r in registros if r.fallecidos == pivote]
+        menores = [r for r in registros if r.fallecidos < pivote]
+
+        # Paso 4: aplicar quicksort recursivamente
+        orden_mayores = self.quicksort_por_fallecidos(mayores)
+        orden_menores = self.quicksort_por_fallecidos(menores)
+
+        # Paso 5: concatenar en orden descendente
+        return orden_mayores + iguales + orden_menores
     # =========================================================================
     # EJERCICIO 5: BÚSQUEDA CON MÚLTIPLES FILTROS
     # =========================================================================
@@ -230,7 +273,21 @@ class AnalizadorCovid:
 
         # TU CÓDIGO AQUÍ
         pass
+        for r in self.registros:
+            if año is not None and r.año != año:
+                continue
+            if con_vacuna is not None and r.hay_vacuna != con_vacuna:
+                continue
+            if con_confinamiento is not None and r.hay_confinamiento != con_confinamiento:
+                continue
+            if min_ingresos_uci is not None and r.ingresos_uci < min_ingresos_uci:
+                continue
+            if max_fallecidos is not None and r.fallecidos > max_fallecidos:
+                continue
 
+            resultado.append(r)
+
+        return resultado
     # =========================================================================
     # EJERCICIO 6: BÚSQUEDA DE PICOS (MÁXIMOS LOCALES)
     # =========================================================================
@@ -262,7 +319,21 @@ class AnalizadorCovid:
 
         # TU CÓDIGO AQUÍ
         pass
+        n = len(self.registros)
 
+        # Recorremos desde 'ventana' hasta 'n - ventana - 1' para evitar bordes
+        for i in range(ventana, n - ventana):
+            actual = self.registros[i].ingresos_uci
+
+            # Extraer ventanas anterior y posterior
+            anteriores = [self.registros[j].ingresos_uci for j in range(i - ventana, i)]
+            posteriores = [self.registros[j].ingresos_uci for j in range(i + 1, i + ventana + 1)]
+
+            # Verificar si el día actual es mayor que todos los vecinos
+            if all(actual > x for x in anteriores + posteriores):
+                picos.append(self.registros[i])
+
+        return picos
     # =========================================================================
     # EJERCICIO 7: TOP K DÍAS MÁS CRÍTICOS
     # =========================================================================
@@ -290,7 +361,19 @@ class AnalizadorCovid:
         """
         # TU CÓDIGO AQUÍ
         pass
+        # Paso 1: calcular índice de criticidad para cada registro
+        registros_con_indice = [
+            ((r.ingresos_uci * 0.5) + (r.fallecidos * 1.5), r)
+            for r in self.registros
+        ]
 
+        # Paso 2: ordenar por índice de criticidad (descendente)
+        registros_ordenados = sorted(registros_con_indice, key=lambda x: x[0], reverse=True)
+
+        # Paso 3: extraer los primeros K registros
+        top_k = [registro for _, registro in registros_ordenados[:k]]
+
+        return top_k
     # =========================================================================
     # EJERCICIO 8: ANÁLISIS DE TENDENCIAS (BÚSQUEDA DE PATRONES)
     # =========================================================================
@@ -321,7 +404,31 @@ class AnalizadorCovid:
 
         # TU CÓDIGO AQUÍ
         pass
+        contador = 0
+        inicio = None
 
+        for i in range(1, len(self.registros)):
+            anterior = self.registros[i - 1].ingresos_uci
+            actual = self.registros[i].ingresos_uci
+            #print(f'anterior = {anterior}')
+            #print(f'actual = {actual}')
+            if actual > anterior:
+                contador += 1
+
+                if contador == 1:
+                    inicio = self.registros[i - 1].fecha_iso
+                if contador >= dias_consecutivos:
+                    print(f'contador = {contador}')
+                    fin = self.registros[i].fecha_iso
+                    periodos.append((inicio, fin))
+                    # Para evitar solapamientos, reiniciamos el contador
+                    contador = 0
+                    inicio = None
+            else:
+                contador = 0
+                inicio = None
+
+        return periodos
     # =========================================================================
     # EJERCICIO 9: CÁLCULO DE ESTADÍSTICAS POR PERIODO
     # =========================================================================
@@ -346,7 +453,38 @@ class AnalizadorCovid:
         """
         # TU CÓDIGO AQUÍ
         pass
+        total_ingresos = 0
+        total_fallecidos = 0
+        max_ingresos = 0
+        max_fallecidos = 0
+        contador = 0
 
+        for r in self.registros:
+            if r.año == año and r.hay_confinamiento == con_confinamiento:
+                total_ingresos += r.ingresos_uci
+                total_fallecidos += r.fallecidos
+                max_ingresos = max(max_ingresos, r.ingresos_uci)
+                max_fallecidos = max(max_fallecidos, r.fallecidos)
+                contador += 1
+
+        if contador == 0:
+            return {
+                "total_ingresos_uci": 0,
+                "total_fallecidos": 0,
+                "promedio_ingresos": 0,
+                "promedio_fallecidos": 0,
+                "max_ingresos": 0,
+                "max_fallecidos": 0
+            }
+
+        return {
+            "total_ingresos_uci": total_ingresos,
+            "total_fallecidos": total_fallecidos,
+            "promedio_ingresos": total_ingresos // contador,
+            "promedio_fallecidos": total_fallecidos // contador,
+            "max_ingresos": max_ingresos,
+            "max_fallecidos": max_fallecidos
+        }
     # =========================================================================
     # EJERCICIO 10: COMPARACIÓN ANTES/DESPUÉS DE LA VACUNA
     # =========================================================================
@@ -371,6 +509,48 @@ class AnalizadorCovid:
         """
         # TU CÓDIGO AQUÍ
         pass
+        # Inicializar acumuladores
+        totales = {
+            'antes': {'ingresos': 0, 'fallecidos': 0, 'dias': 0},
+            'despues': {'ingresos': 0, 'fallecidos': 0, 'dias': 0}
+        }
+
+        # Recorrer registros
+        for r in self.registros:
+            grupo = 'despues' if r.hay_vacuna else 'antes'
+            totales[grupo]['ingresos'] += r.ingresos_uci
+            totales[grupo]['fallecidos'] += r.fallecidos
+            totales[grupo]['dias'] += 1
+
+        # Calcular promedios
+        def calcular_promedios(data):
+            dias = data['dias'] or 1  # evitar división por cero
+            return {
+                'total_ingresos_uci': data['ingresos'],
+                'total_fallecidos': data['fallecidos'],
+                'promedio_ingresos': data['ingresos'] // dias,
+                'promedio_fallecidos': data['fallecidos'] // dias
+            }
+
+        antes = calcular_promedios(totales['antes'])
+        despues = calcular_promedios(totales['despues'])
+
+        # Calcular reducción porcentual
+        def reduccion(pasado, presente):
+            if pasado == 0:
+                return 0
+            return round(100 * (pasado - presente) / pasado, 2)
+
+        reduccion_porcentual = {
+            'ingresos_uci': reduccion(antes['promedio_ingresos'], despues['promedio_ingresos']),
+            'fallecidos': reduccion(antes['promedio_fallecidos'], despues['promedio_fallecidos'])
+        }
+
+        return {
+            'antes_vacuna': antes,
+            'despues_vacuna': despues,
+            'reduccion_porcentual': reduccion_porcentual
+        }
 
     # =========================================================================
     # MÉTODOS AUXILIARES (YA IMPLEMENTADOS)
@@ -401,7 +581,7 @@ def ejecutar_pruebas():
     print("=" * 80)
 
     # Inicializar analizador
-    analizador = AnalizadorCovid(r'C:\Users\jhonnconnor367\PycharmProjects\wooldridge\data\2ingresos_en_uci_y_fallecidos_por_coronavirus_en_españa.csv')
+    analizador = AnalizadorCovid(r'C:\Users\gonzzo\Desktop\CURSO\PycharmProjects\DATOS\2ingresos_en_uci_y_fallecidos_por_coronavirus_en_españa.csv')
 
     # -------------------------------------------------------------------------
     # PRUEBA 1: Búsqueda Lineal
