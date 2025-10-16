@@ -578,7 +578,7 @@ def ejecutar_pruebas():
     print("=" * 80)
 
     # Inicializar analizador
-    analizador = AnalizadorCovid(r'C:\Users\gonzzo\Desktop\CURSO\PycharmProjects\DATOS\2ingresos_en_uci_y_fallecidos_por_coronavirus_en_españa.csv')
+    analizador = AnalizadorCovid(r'C:\Users\tarde\Desktop\ProgramacionCursoIA\DATOS\2ingresos_en_uci_y_fallecidos_por_coronavirus_en_españa.csv')
 
     # -------------------------------------------------------------------------
     # PRUEBA 1: Búsqueda Lineal
