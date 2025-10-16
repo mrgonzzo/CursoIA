@@ -410,11 +410,8 @@ class AnalizadorCovid:
         for i in range(1, len(self.registros)):
             anterior = self.registros[i - 1].ingresos_uci
             actual = self.registros[i].ingresos_uci
-            #print(f'anterior = {anterior}')
-            #print(f'actual = {actual}')
             if actual > anterior:
                 contador += 1
-
                 if contador == 1:
                     inicio = self.registros[i - 1].fecha_iso
                 if contador >= dias_consecutivos:
