@@ -1,0 +1,8 @@
+Strain,Type,THC_Level,Myrcene,Limonene,Caryophyllene,Relaxed,Happy,Uplifted,Sleepy,Image_URL,PC1,PC2,Cluster
+Amnesia Haze,Sativa,22.5,0.2,0.8,0.15,3,5,5,1,url_ahaze.jpg,3.328238475988424,-0.3218013224332379,2
+Blue Dream,Hybrid,18.0,0.4,0.3,0.3,4,4,3,2,url_bdream.jpg,0.4801075390722821,-0.2997363403644515,0
+Girl Scout Cookies,Hybrid,24.0,0.1,0.4,0.25,5,3,3,3,url_gsc.jpg,0.6232641428563505,1.8918437426443195,0
+White Rhino,Indica,16.5,1.2,0.05,0.7,5,2,1,5,url_wrr.jpg,-3.536272841035876,-0.4076436289374313,1
+Granddaddy Purple,Indica,17.5,0.9,0.1,0.6,5,3,1,4,url_gdp.jpg,-2.362421881305366,-0.2349270096639591,1
+Northern Lights,Indica,20.0,1.1,0.08,0.55,5,3,1,4,url_nl.jpg,-2.215000136126992,-0.0594629588947299,1
+Sour Diesel,Sativa,25.5,0.3,0.75,0.2,2,5,5,1,url_sd.jpg,3.682084700551175,-0.5682724823505106,2
