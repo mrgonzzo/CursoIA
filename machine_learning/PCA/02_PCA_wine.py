@@ -1,6 +1,7 @@
 from sklearn.datasets import fetch_openml
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
+from scipy.cluster.hierarchy import dendrogram, linkage, fcluster
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
@@ -94,3 +95,62 @@ ax2.legend()
 
 plt.tight_layout()
 plt.show()
+
+# Estandarizar
+X_escalado = StandardScaler().fit_transform(X)
+
+# Linkage (solo 30 vinos para visualizar mejor)
+X_muestra = X_escalado[:30]
+linkage_matrix = linkage(X_muestra, method='ward')
+# Dendrograma
+plt.figure(figsize=(12, 6))
+dendrogram(linkage_matrix, labels=[f'V{i}' for i in range(30)])
+plt.title('Dendrograma: PCA Vinos')
+plt.xlabel('Vino')
+plt.ylabel('Distancia')
+plt.axhline(y=50, c='red', linestyle='--', alpha=0.5, label='Corte propuesto')
+plt.legend()
+plt.tight_layout()
+plt.show()
+plt.savefig('PCA_Dendrograma_Agrupamiento_Vinos.png')
+plt.close()
+
+print("\nGenerando gráfico tipo telaraña...")
+
+# Calculamos las medias por tipo de vino
+df = pd.DataFrame(X, columns=feature_names)
+df['Tipo'] = y
+
+mean_por_tipo = df.groupby('Tipo').mean()
+
+# Seleccionamos solo algunas variables (para que sea legible)
+variables = feature_names[:6]  # puedes elegir más o menos
+num_vars = len(variables)
+
+# Calculamos los ángulos del círculo
+angles = np.linspace(0, 2 * np.pi, num_vars, endpoint=False).tolist()
+angles += angles[:1]  # Cerramos el círculo
+
+# Creamos la figura polar
+fig, ax = plt.subplots(figsize=(7, 7), subplot_kw=dict(polar=True))
+
+colores = ['red', 'green', 'blue']
+nombres_tipos = ['Tipo A', 'Tipo B', 'Tipo C']
+
+for i, tipo in enumerate(mean_por_tipo.index):
+    valores = mean_por_tipo.loc[tipo, variables].values.tolist()
+    valores += valores[:1]  # cerramos el círculo
+    ax.plot(angles, valores, color=colores[i], linewidth=2, label=nombres_tipos[i])
+    ax.fill(angles, valores, color=colores[i], alpha=0.25)
+
+# Configuración del gráfico
+ax.set_xticks(angles[:-1])
+ax.set_xticklabels(variables, fontsize=10)
+ax.set_title("Perfil químico medio por tipo de vino", fontsize=14, pad=20)
+ax.legend(loc='upper right', bbox_to_anchor=(1.25, 1.1))
+ax.grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+plt.savefig('PCA_RadarChart_Vinos.png')
+plt.close()

@@ -1,0 +1,27 @@
+REPORTE DE ARQUITECTURA Y PROCESAMIENTO DE DATOS
+--------------------------------------------------
+## 1. Fusión de DataSets Heterogéneos
+El sistema se basa en la fusión de 4 fuentes clave:
+- 🚨 **Police_Incidents_GeoTime** (Datos delictivos)
+- 💰 **SocioEcon_Censo** (Renta, Densidad)
+- 🏗️ **Urbanisticos_SIG** (Iluminación, Uso del Suelo)
+- 🗓️ **Contextual_Eventos** (Eventos, Temporalidad)
+El dataset resultante tiene 10 registros (cuadrículas x tiempo) y 17 características.
+
+## 2. Preprocesamiento $sklearn$ y Deducciones Clave
+**DEDUCCIÓN 1 (Escalamiento):** La **StandardScaler** aplicada a la 'Renta_Media_Hogar' y 'Densidad_Poblacion' asegura que las variables numéricas contribuyan sin sesgo por magnitud, fundamental para la **Regresión Logística**.
+**DEDUCCIÓN 2 (Codificación Categórica):** El **OneHotEncoder** ($sklearn$) convirtió las variables discretas (como 'Hora_Dia', 'Tipo_Uso_Suelo') en un espacio de características expandido de 17 columnas, permitiendo que los modelos de **Random Forest** capturen las complejas interacciones.
+
+## 3. Análisis Gráfico (Anexo Imagen)
+El gráfico 'Incidencia_UsoSuelo.png' demuestra que las zonas **Industrial** tienen la mayor tasa de incidencia. Esta es una deducción crucial de **Ingeniería de Características**.
+
+## 4. Datos Procesados (Muestra)
+Se incluye una muestra del DataFrame final listo para el ML (escalado y codificado):
+   Iluminacion_Media  Renta_Media_Hogar  Densidad_Poblacion  Tipo_Uso_Suelo_Comercial  Tipo_Uso_Suelo_Industrial  Tipo_Uso_Suelo_Residencial  Evento_Programado_No  Evento_Programado_Si  Hora_Dia_Mañana  Hora_Dia_Noche  Hora_Dia_Tarde  Dia_Semana_Jueves  Dia_Semana_Lunes  Dia_Semana_Martes  Dia_Semana_Miercoles  Dia_Semana_Sabado  Dia_Semana_Viernes
+0           0.616649          -0.499802            0.824421                       1.0                        0.0                         0.0                   1.0                   0.0              0.0             0.0             1.0                0.0               0.0                0.0                   1.0                0.0                 0.0
+1           1.387460           1.180204           -0.487158                       0.0                        0.0                         1.0                   1.0                   0.0              1.0             0.0             0.0                0.0               1.0                0.0                   0.0                0.0                 0.0
+2          -1.162146          -1.087803           -1.486455                       0.0                        1.0                         0.0                   0.0                   1.0              0.0             1.0             0.0                0.0               0.0                0.0                   0.0                0.0                 1.0
+3          -0.154162           0.592202            0.387228                       0.0                        0.0                         1.0                   1.0                   0.0              0.0             0.0             1.0                1.0               0.0                0.0                   0.0                0.0                 0.0
+4          -0.391335          -0.751802            1.324069                       1.0                        0.0                         0.0                   0.0                   1.0              0.0             1.0             0.0                0.0               0.0                0.0                   0.0                0.0                 1.0
+
+(En el PDF real, se insertaría el gráfico Incidencia_UsoSuelo.png aquí.)
