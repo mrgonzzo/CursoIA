@@ -1,0 +1,43 @@
+--------------------------------------------------------------------------------
+REPORTE DE PCA Y ESTRATEGIAS DE MODELADO (REGRESIÓN DE COMPONENTES PRINCIPALES)
+--------------------------------------------------------------------------------
+
+## B. VARIANZA EXPLICADA POR COMPONENTE PRINCIPAL (PC)
+Este porcentaje indica cuánta información de los datos originales capta cada PC:
+PC1    23.85
+PC2    16.18
+PC3    12.93
+PC4    12.01
+PC5    11.79
+
+Las primeras 5 PCs capturan un total del 76.77% de la varianza.
+
+## C. TABLA DE LOADINGS (PESOS DE LAS VARIABLES EN CADA PC)
+Estos pesos (coeficientes) indican la contribución y dirección de cada variable original en la nueva componente (PC).
+                         PC1    PC2    PC3    PC4    PC5
+Renta_Media            0.486 -0.279 -0.038 -0.598 -0.010
+Promedio_Habitaciones  0.559 -0.319  0.118 -0.049 -0.106
+Antiguedad_Vivienda    0.403 -0.053 -0.035  0.700 -0.387
+UrbanPop               0.070  0.051  0.931  0.095  0.277
+IMC                    0.353  0.568  0.057 -0.116 -0.011
+Presion_Sanguinea      0.197  0.700 -0.088 -0.112 -0.063
+Tamano_Grupo           0.262 -0.023 -0.306  0.279  0.866
+Dia_Semana_Fri        -0.066  0.036  0.004 -0.063  0.014
+Dia_Semana_Sat         0.050 -0.003  0.022  0.159 -0.068
+Dia_Semana_Sun         0.117 -0.019 -0.072 -0.053  0.026
+
+--- EXPLICACIÓN DE LA TABLA DE LOADINGS ---
+El valor de los loadings revela cómo se combinan variables de diferentes datasets (CH, USArrests, Diabetes, Tips) en un patrón latente. Por ejemplo, una alta correlación entre una feature de vivienda y una de salud sugiere un 'Índice de Estabilidad Socio-Sanitaria'.
+
+## D. RESPUESTA A PREGUNTAS METODOLÓGICAS CLAVE:
+**PREGUNTA D1: ¿PCA nos ayuda a encontrar patrones ocultos entre datasets?**
+**Respuesta:** Sí. PCA descubre patrones latentes (Componentes Principales) que son combinaciones lineales de variables de múltiples datasets (e.g., California Housing y USArrests). La PC1 representa el patrón de variación más fuerte y constante en el espacio de características unificado.
+**PREGUNTA D2: ¿Se puede usar un MCO con los PCA's hallados, qué resultaría?**
+**Respuesta:** Sí, esta técnica se llama **Regresión de Componentes Principales (PCR)**. Resultaría en un modelo MCO **estable y robusto** porque las PCs son ortogonales, eliminando el problema de la **multicolinealidad** común en la fusión de datasets heterogéneos. También mejora la generalización al descartar ruido.
+**PREGUNTA D3: ¿Se puede usar dendrogramas y podarlos para mejorar predicciones?**
+**Respuesta:** Los dendrogramas del Clustering Jerárquico se **cortan**, no se podan. La **poda (pruning)** es una técnica de **regularización** que se aplica a los **árboles de decisión** (Random Forest) para simplificarlos y evitar el sobreajuste, mejorando así su capacidad de predicción en datos nuevos.
+**PREGUNTA D4: ¿Es mejor combinar features originales o componentes principales?**
+**Respuesta:** Depende del objetivo.
+- **Features Originales:** Mejor para la **Interpretabilidad** (explicar causalidad directa).
+- **Componentes Principales (PCR):** Mejor para la **Estabilidad, Robustez y Eficiencia** (fundamental en este caso por la alta correlación entre datasets).
+--------------------------------------------------------------------------------

@@ -1,0 +1,49 @@
+--------------------------------------------------------------------------------
+REPORTE DE PCA Y ESTRATEGIAS DE MODELADO (REGRESIÓN DE COMPONENTES PRINCIPALES)
+--------------------------------------------------------------------------------
+
+## A. ESTRATEGIA: REGRESIÓN DE COMPONENTES PRINCIPALES (PCR)
+Se ha aplicado PCA a las características unificadas (X_final) para prepararlas para un modelo MCO (Regresión de Componentes Principales).
+
+## B. VARIANZA EXPLICADA POR COMPONENTE PRINCIPAL (PC)
+Este porcentaje indica cuánta información de los datos originales capta cada PC:
+PC1    23.85
+PC2    16.18
+PC3    12.93
+PC4    12.01
+PC5    11.79
+
+Las primeras 5 PCs capturan un total del 76.77% de la varianza.
+
+## C. TABLA DE LOADINGS (PESOS DE LAS VARIABLES EN CADA PC)
+Estos pesos (coeficientes) indican la contribución y dirección de cada variable original en la nueva componente (PC).
+                         PC1    PC2    PC3    PC4    PC5
+Renta_Media            0.486 -0.279 -0.038 -0.598 -0.010
+Promedio_Habitaciones  0.559 -0.319  0.118 -0.049 -0.106
+Antiguedad_Vivienda    0.403 -0.053 -0.035  0.700 -0.387
+UrbanPop               0.070  0.051  0.931  0.095  0.277
+IMC                    0.353  0.568  0.057 -0.116 -0.011
+Presion_Sanguinea      0.197  0.700 -0.088 -0.112 -0.063
+Tamano_Grupo           0.262 -0.023 -0.306  0.279  0.866
+Dia_Semana_Fri        -0.066  0.036  0.004 -0.063  0.014
+Dia_Semana_Sat         0.050 -0.003  0.022  0.159 -0.068
+Dia_Semana_Sun         0.117 -0.019 -0.072 -0.053  0.026
+
+--- EXPLICACIÓN DE LA TABLA DE LOADINGS ---
+**1. Interpretación de la PC1 (Varianza Explicada más alta):**
+La PC1 suele representar el patrón más fuerte y constante en los datos. Los pesos más altos (positivos o negativos) en la columna 'PC1' revelan la combinación de variables que define la mayor variación.
+Por ejemplo:
+- Si 'Renta_Media' tiene un peso positivo alto en PC1, y 'UrbanPop' un peso negativo alto, PC1 puede interpretarse como 'Índice de Riqueza Suburbana'.
+- Los coeficientes cercanos a cero indican que esa variable no es significativa para esa PC en particular.
+**2. Hallazgo de Patrones Ocultos:**
+El valor de los loadings es que revela las correlaciones inter-dataset (la pregunta '¿PCA nos ayuda a encontrar patrones ocultos entre datasets?'):
+ - Un alto loading entre una feature de **California Housing** (e.g., 'Antiguedad_Vivienda') y una feature de **Diabetes** (e.g., 'IMC') indicaría un fuerte vínculo latente entre la infraestructura antigua y un perfil de salud demográfico específico.
+
+## D. RESPUESTA A PREGUNTAS CLAVE DEL PROYECTO (Integración de Análisis):
+**PREGUNTA 1: ¿Qué aporta cada fuente de información?**
+Respuesta: La potencia reside en la heterogeneidad: CH aporta el contexto Socio-Económico, USArrests el objetivo y Demografía (UrbanPop), Diabetes el proxy Biométrico, y Tips el Contexto Temporal (Día, Momento).
+**PREGUNTA 2: ¿Es mejor combinar features originales o componentes principales?**
+Respuesta: Depende del objetivo.
+- Usar **Features Originales** es mejor para la **Interpretabilidad** (explicar la Renta vs. Delincuencia).
+- Usar **Componentes Principales (PCR)** es mejor para la **Estabilidad, Robustez y Eficiencia** (especialmente útil aquí por la alta colinealidad esperada en la fusión de datasets).
+--------------------------------------------------------------------------------

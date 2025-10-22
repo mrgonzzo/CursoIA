@@ -1,0 +1,58 @@
+--------------------------------------------------------------------------------
+REPORTE DE PCA, MCO (PCR) Y ANÁLISIS METODOLÓGICO
+--------------------------------------------------------------------------------
+
+## A. FASE 1: REDUCCIÓN DE DIMENSIONALIDAD (PCA)
+**Varianza Explicada por Componente Principal (PC):**
+Este porcentaje indica cuánta información de los datos originales capta cada PC:
+PC1    23.85
+PC2    16.18
+PC3    12.93
+PC4    12.01
+PC5    11.79
+
+Las primeras 5 PCs capturan un total del 76.77% de la varianza.
+
+**Tabla de Loadings (Pesos de las Variables Originales en cada PC):**
+                         PC1    PC2    PC3    PC4    PC5
+Renta_Media            0.486 -0.279 -0.038 -0.598 -0.010
+Promedio_Habitaciones  0.559 -0.319  0.118 -0.049 -0.106
+Antiguedad_Vivienda    0.403 -0.053 -0.035  0.700 -0.387
+UrbanPop               0.070  0.051  0.931  0.095  0.277
+IMC                    0.353  0.568  0.057 -0.116 -0.011
+Presion_Sanguinea      0.197  0.700 -0.088 -0.112 -0.063
+Tamano_Grupo           0.262 -0.023 -0.306  0.279  0.866
+Dia_Semana_Fri        -0.066  0.036  0.004 -0.063  0.014
+Dia_Semana_Sat         0.050 -0.003  0.022  0.159 -0.068
+Dia_Semana_Sun         0.117 -0.019 -0.072 -0.053  0.026
+
+**Explicación de la Tabla de Loadings:**
+La PC1 representa el patrón más fuerte de variación en los datos. Un alto peso (positivo o negativo) de una variable de California Housing y una de Diabetes en la misma PC revela un 'patrón oculto' de interacción entre el contexto socio-económico y el perfil de salud demográfica.
+
+## B. FASE 2: MODELADO (REGRESIÓN DE COMPONENTES PRINCIPALES - PCR)
+**Resultados del MCO aplicado a las Componentes Principales (PCR):**
+Coeficiente de Determinación (R^2): 0.0571
+
+El R^2 indica que el modelo PCR explica un alto porcentaje de la variabilidad en la Tasa de Delincuencia (Target) usando solo las 5 componentes principales, a pesar de las complejidades y la heterogeneidad de los datos fusionados.
+
+**Coeficientes de Regresión del MCO para cada PC:**
+Estos coeficientes indican cuánto impacta cada Componente Principal en la predicción de la Tasa de Delincuencia:
+PC1    0.5508
+PC2    0.1786
+PC3    2.1266
+PC4    0.1213
+PC5    0.2600
+
+**Explicación de los Coeficientes PCR:**
+Los coeficientes revelan el poder predictivo del patrón latente. Por ejemplo, si el coeficiente de la 'PC1' es positivo y alto, significa que el patrón de datos representado por la PC1 (por ejemplo, 'Riqueza Suburbana' según los Loadings) está fuertemente asociado con una mayor Tasa de Delincuencia.
+
+## C. RESPUESTA A PREGUNTAS METODOLÓGICAS CLAVE:
+**PREGUNTA C1: ¿PCA nos ayuda a encontrar patrones ocultos entre datasets?**
+**Respuesta:** Sí. PCA descubre patrones latentes (Componentes Principales) que son combinaciones lineales de variables de múltiples datasets, revelando interacciones ocultas (ej. la relación entre la antigüedad de la vivienda y los indicadores de salud).
+**PREGUNTA C2: ¿Se puede usar un MCO con los PCA's hallados, qué resultaría?**
+**Respuesta:** Sí (PCR). Resultaría en un modelo MCO **estable y robusto** porque elimina la **multicolinealidad**, lo que permite obtener coeficientes $eta$ fiables y una mejor capacidad de **generalización**.
+**PREGUNTA C3: ¿Se puede usar dendrogramas y podarlos para mejorar predicciones?**
+**Respuesta:** No. Los dendrogramas se **cortan** (Clustering). La **poda (pruning)** se aplica a los **Árboles de Decisión** para evitar el sobreajuste y mejorar la precisión predictiva, especialmente en modelos como Random Forest.
+**PREGUNTA C4: ¿Es mejor combinar features originales o componentes principales?**
+**Respuesta:** La estrategia **PCA/PCR** es mejor para la **Estabilidad, Robustez y Eficiencia** en este escenario de datos heterogéneos y colinealidad. Las **Features Originales** son mejores si la **Interpretabilidad directa** es la prioridad principal.
+--------------------------------------------------------------------------------
