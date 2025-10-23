@@ -1,7 +1,7 @@
 ================================================================================
 ANÁLISIS DE SERIES TEMPORALES CON MODELO ARIMA
 Base de datos: barium (Wooldridge)
-Fecha de análisis: 23/10/2025 19:53:04
+Fecha de análisis: 23/10/2025 20:15:42
 ================================================================================
 
 PASO 1: DATOS ORIGINALES
@@ -213,5 +213,5 @@ Predicciones futuras:
   Horizonte: 24 meses
   Rango: 946.03 - 1050.10 toneladas
 
-Análisis completado: 23/10/2025 19:53:16
+Análisis completado: 23/10/2025 20:15:53
 ================================================================================
