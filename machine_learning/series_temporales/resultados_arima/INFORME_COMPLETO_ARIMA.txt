@@ -1,0 +1,217 @@
+================================================================================
+ANÁLISIS DE SERIES TEMPORALES CON MODELO ARIMA
+Base de datos: barium (Wooldridge)
+Fecha de análisis: 23/10/2025 19:53:04
+================================================================================
+
+PASO 1: DATOS ORIGINALES
+--------------------------------------------------------------------------------
+Serie: Importaciones de Bario Chino
+Período: 1978-02 a 1988-12
+Observaciones: 131
+
+Estadísticas descriptivas:
+  Media: 589.24
+  Desviación estándar: 349.54
+  Mínimo: 39.68
+  Máximo: 1794.52
+  Mediana: 535.72
+
+PASO 2: DESCOMPOSICIÓN ESTACIONAL
+--------------------------------------------------------------------------------
+Método: Descomposición aditiva
+Período estacional: 12 meses
+
+PASO 3: PRUEBAS DE ESTACIONARIEDAD (Test ADF)
+--------------------------------------------------------------------------------
+
+Serie Original:
+  Estadístico ADF: -2.5469
+  p-valor: 0.1045
+  Resultado: ✗ NO ESTACIONARIA
+
+PASO 4: TRANSFORMACIONES CLÁSICAS
+--------------------------------------------------------------------------------
+
+Logaritmo:
+  Estadístico ADF: -2.7222
+  p-valor: 0.0703
+  Resultado: ✗ NO ESTACIONARIA
+
+Diferencia Regular (d=1):
+  Estadístico ADF: -9.1998
+  p-valor: 0.0000
+  Resultado: ✓ ESTACIONARIA
+
+Diferencia Estacional (D=1, s=12):
+  Estadístico ADF: -4.1221
+  p-valor: 0.0009
+  Resultado: ✓ ESTACIONARIA
+
+Log + Diferencia Regular:
+  Estadístico ADF: -7.9499
+  p-valor: 0.0000
+  Resultado: ✓ ESTACIONARIA
+
+Log + Diferencia Estacional:
+  Estadístico ADF: -5.7801
+  p-valor: 0.0000
+  Resultado: ✓ ESTACIONARIA
+
+Diferencia Regular + Estacional:
+  Estadístico ADF: -4.1155
+  p-valor: 0.0009
+  Resultado: ✓ ESTACIONARIA
+
+Log + Dif. Regular + Estacional:
+  Estadístico ADF: -3.6333
+  p-valor: 0.0052
+  Resultado: ✓ ESTACIONARIA
+
+PASO 5: ANÁLISIS DE AUTOCORRELACIÓN (ACF Y PACF)
+--------------------------------------------------------------------------------
+Nota: Los gráficos excluyen el lag 0 para mejor visualización
+
+PASO 6: ESTIMACIÓN Y SELECCIÓN DE MODELOS
+--------------------------------------------------------------------------------
+
+División de datos:
+  Entrenamiento: 111 observaciones (84.7%)
+  Prueba: 20 observaciones (15.3%)
+
+Total de modelos estimados: 48
+
+Top 15 modelos por Criterio de Akaike (AIC):
+
+  1. ARIMA(2,2,2): AIC=1561.2006, BIC=1574.6574
+  2. ARIMA(1,2,2): AIC=1561.8158, BIC=1572.5812
+  3. ARIMA(1,2,3): AIC=1562.4596, BIC=1575.9163
+  4. ARIMA(0,2,3): AIC=1563.0110, BIC=1573.7764
+  5. ARIMA(0,2,2): AIC=1563.7212, BIC=1571.7953
+  6. ARIMA(2,2,3): AIC=1563.9761, BIC=1580.1242
+  7. ARIMA(0,1,3): AIC=1567.9067, BIC=1578.7086
+  8. ARIMA(2,1,1): AIC=1568.2109, BIC=1579.0128
+  9. ARIMA(1,1,3): AIC=1568.9903, BIC=1582.4927
+  10. ARIMA(1,1,1): AIC=1569.2406, BIC=1577.3420
+  11. ARIMA(0,1,1): AIC=1569.4629, BIC=1574.8638
+  12. ARIMA(1,1,2): AIC=1569.4939, BIC=1580.2958
+  13. ARIMA(2,1,3): AIC=1569.5224, BIC=1585.7253
+  14. ARIMA(0,1,2): AIC=1569.9695, BIC=1578.0709
+  15. ARIMA(3,1,1): AIC=1570.1343, BIC=1583.6368
+
+PASO 7: MEJOR MODELO SELECCIONADO
+--------------------------------------------------------------------------------
+Modelo: ARIMA(2, 2, 2)
+AIC: 1561.2006
+BIC: 1574.6574
+
+Parámetros estimados:
+  ar.L1: 0.1611 (p-valor: 0.1031)
+  ar.L2: 0.1622 (p-valor: 0.0880)
+  ma.L1: -1.9951 (p-valor: 0.0000)
+  ma.L2: 0.9952 (p-valor: 0.0000)
+  sigma2: 78424.4950 (p-valor: 0.0000)
+
+PASO 8: DIAGNÓSTICO DE RESIDUOS
+--------------------------------------------------------------------------------
+
+Estadísticas de los residuos:
+  Media: -14.435907
+  Desviación estándar: 290.6750
+  Asimetría (Skewness): 0.5781
+  Curtosis: 0.4230
+
+PASO 9: PREDICCIONES Y EVALUACIÓN
+--------------------------------------------------------------------------------
+
+EVALUACIÓN EN CONJUNTO DE PRUEBA
+
+Métricas de Error:
+  RMSE (Root Mean Square Error): 324.9974
+  MSE (Mean Square Error): 105623.3373
+  MAE (Mean Absolute Error): 219.3232
+  MAPE (Mean Absolute Percentage Error): 24.07%
+
+COEFICIENTE DE DESIGUALDAD DE THEIL (Theil's U):
+  Valor: 0.180247
+
+Descomposición del Coeficiente de Theil:
+  Proporción de Sesgo (Bias): 0.0370 (3.70%)
+  Proporción de Varianza: 83603.9011 (8360390.11%)
+  Proporción de Covarianza: -83602.9381 (-8360293.81%)
+
+Interpretación del Coeficiente de Theil:
+  Excelente capacidad predictiva
+
+Nota: Un Coeficiente de Theil < 1 indica que el modelo
+      es mejor que un pronóstico ingenuo (naive forecast).
+
+TABLA COMPARATIVA: VALORES REALES vs. AJUSTADOS/PREDICHOS
+--------------------------------------------------------------------------------
+Muestra de la serie completa (Valores en toneladas):
+
+Nota: 'Ajustado' aplica al set de entrenamiento; 'Predicho' aplica al set de prueba.
+
+          Real   Ajustado Predicho
+1978-02   220.46    0.00      --- 
+1978-03    94.80  323.51      --- 
+1978-04   219.36   50.28      --- 
+1978-05   317.42  184.62      --- 
+1978-06   114.64  332.08      --- 
+1988-08   589.42     ---   875.77 
+1988-09   529.73     ---   880.63 
+1988-10   968.04     ---   885.49 
+1988-11   794.06     ---   890.35 
+1988-12  1087.81     ---   895.21 
+
+PREDICCIONES FUTURAS (24 meses adelante):
+
+  1989-01:   952.09  [IC 95%:   383.52 -  1520.65]
+  1989-02:   952.46  [IC 95%:   370.46 -  1534.46]
+  1989-03:   946.03  [IC 95%:   358.13 -  1533.94]
+  1989-04:   948.65  [IC 95%:   359.32 -  1537.97]
+  1989-05:   952.46  [IC 95%:   362.40 -  1542.52]
+  1989-06:   957.18  [IC 95%:   366.65 -  1547.72]
+  1989-07:   962.17  [IC 95%:   371.24 -  1553.11]
+  1989-08:   967.28  [IC 95%:   375.98 -  1558.59]
+  1989-09:   972.43  [IC 95%:   380.76 -  1564.11]
+  1989-10:   977.60  [IC 95%:   385.56 -  1569.64]
+  1989-11:   982.78  [IC 95%:   390.37 -  1575.18]
+  1989-12:   987.95  [IC 95%:   395.17 -  1580.73]
+  1990-01:   993.13  [IC 95%:   399.98 -  1586.29]
+  1990-02:   998.31  [IC 95%:   404.77 -  1591.85]
+  1990-03:  1003.49  [IC 95%:   409.57 -  1597.42]
+  1990-04:  1008.67  [IC 95%:   414.35 -  1602.99]
+  1990-05:  1013.85  [IC 95%:   419.14 -  1608.56]
+  1990-06:  1019.03  [IC 95%:   423.92 -  1614.14]
+  1990-07:  1024.21  [IC 95%:   428.69 -  1619.72]
+  1990-08:  1029.39  [IC 95%:   433.46 -  1625.31]
+  1990-09:  1034.57  [IC 95%:   438.23 -  1630.91]
+  1990-10:  1039.75  [IC 95%:   442.99 -  1636.50]
+  1990-11:  1044.93  [IC 95%:   447.74 -  1642.11]
+  1990-12:  1050.10  [IC 95%:   452.50 -  1647.71]
+
+
+================================================================================
+RESUMEN FINAL DEL ANÁLISIS
+================================================================================
+
+Mejor modelo seleccionado: ARIMA(2, 2, 2)
+  AIC: 1561.2006
+  BIC: 1574.6574
+
+Evaluación del Modelo:
+  Coeficiente de Theil (U): 0.180247
+  RMSE: 324.9974
+  MAE: 219.3232
+  MAPE: 24.07%
+
+Interpretación:
+  Excelente capacidad predictiva
+
+Predicciones futuras:
+  Horizonte: 24 meses
+  Rango: 946.03 - 1050.10 toneladas
+
+Análisis completado: 23/10/2025 19:53:16
+================================================================================
