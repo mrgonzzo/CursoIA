@@ -1,0 +1,82 @@
+[
+    {
+        "caso": 1,
+        "nombre": "Servidor Apolo - Fallo Crítico Hardware",
+        "datos": {
+            "temperatura_cpu": 98.5,
+            "estado_ventilador": "lento",
+            "perdida_paquetes": 2.0,
+            "latencia_red": 50.0,
+            "smart_status": "error",
+            "sectores_reubicados": 5,
+            "errores_ecc": 2,
+            "tiempo_actividad": 150,
+            "uso_disco_raiz": 45.0,
+            "tipo_sistema": "produccion"
+        }
+    },
+    {
+        "caso": 2,
+        "nombre": "Nodo Hermes - Problema de Conectividad y Disco Lleno",
+        "datos": {
+            "temperatura_cpu": 75.0,
+            "estado_ventilador": "normal",
+            "perdida_paquetes": 70.0,
+            "latencia_red": 650.0,
+            "smart_status": "ok",
+            "sectores_reubicados": 0,
+            "errores_ecc": 8,
+            "tiempo_actividad": 80,
+            "uso_disco_raiz": 97.0,
+            "tipo_sistema": "produccion"
+        }
+    },
+    {
+        "caso": 3,
+        "nombre": "Servidor Zeus - Sin Fallos",
+        "datos": {
+            "temperatura_cpu": 65.0,
+            "estado_ventilador": "normal",
+            "perdida_paquetes": 0.0,
+            "latencia_red": 25.0,
+            "smart_status": "ok",
+            "sectores_reubicados": 0,
+            "errores_ecc": 0,
+            "tiempo_actividad": 500,
+            "uso_disco_raiz": 80.0,
+            "tipo_sistema": "desarrollo"
+        }
+    },
+    {
+        "caso": 4,
+        "nombre": "Nodo Hera - Fallo de Memoria RAM y Advertencia",
+        "datos": {
+            "temperatura_cpu": 80.0,
+            "estado_ventilador": "normal",
+            "perdida_paquetes": 5.0,
+            "latencia_red": 100.0,
+            "smart_status": "ok",
+            "sectores_reubicados": 0,
+            "errores_ecc": 6,
+            "tiempo_actividad": 100,
+            "uso_disco_raiz": 99.0,
+            "tipo_sistema": "produccion"
+        }
+    },
+    {
+        "caso": 5,
+        "nombre": "Servidor Ártemis - Operación Normal",
+        "datos": {
+            "temperatura_cpu": 75.0,
+            "estado_ventilador": "normal",
+            "perdida_paquetes": 0.0,
+            "latencia_red": 250.0,
+            "smart_status": "ok",
+            "sectores_reubicados": 0,
+            "errores_ecc": 0,
+            "tiempo_actividad": 500,
+            "uso_disco_raiz": 70.0,
+            "tipo_sistema": "desarrollo"
+        }
+    }
+]
