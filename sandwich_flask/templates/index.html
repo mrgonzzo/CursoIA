@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+	<link rel = "stylesheet" href = "{{url_for('static', filename='styles_index.css')}}">
+    <title>Creación de Sándwich</title>
+</head>
+
+<body>
+    
+	<div class = "cabecera">
+		
+		<div class = "titulo">
+		
+			<h1> &#129386; Creación de Sandwiches &#129386;</h1>
+			
+		</div>
+		
+	</div>
+	
+	<div class = "contenido">
+	
+		<div class = "introduccion">
+		
+			<h2> Bienvenid@ a la página donde crearás tu sándwich ideal </h2>
+			<p> Con la creación de esta página gracias a HTML, CSS, Python y Flask, tengo la intención de que puedas crear el mejor sándwich que puedas, además de guardar un registro con los que has ido creando y el precio. Estos servicios no disponen con todos los ingredientes del mundo, ¡pero tenemos más que de sobra! ¿Estás listo? ¡Pues vamos allá! </p>
+			<p> Elige una de estas opciones: </p>
+			
+		</div>
+		
+		<div class="botones">
+		
+		<button class="btn crear"><a class = "enlace_boton" href = "{{url_for('creacion')}}">Crear Sándwich</a></button>
+		<button class="btn ingredientes">
+			<a class="enlace_boton" href="{{ url_for('ingredientes') }}">Ver Ingredientes Actuales</a>
+		</button>
+		<button class="btn registro"><a class = "enlace_boton" href = "{{url_for('registro')}}">Registro de Sándwiches</a></button>
+		
+		</div>	
+		
+	</div>
+	
+</body>
+
+</html>
