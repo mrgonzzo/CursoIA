@@ -1,0 +1,24 @@
+Eres un experto programador python.
+
+TAREA: Crear sistema experto para Diagnóstico de problemas de computadora modelando fallos hardware, nodos, servidores.
+debes usar el dataset: 
+ Computer Failure Data Repository (CFDR)
+ Datos de fallos en sistemas informáticos de producción (clusters, componentes hardware) publicados por USENIX. 
+
+Ideal si quieres modelar fallos hardware, nodos, servidores.
+
+Requisitos:
+✓ Mínimo 5 reglas if-then
+✓ Mínimo 2 casos de prueba
+✓ Comparar con cómo lo haría ML
+✓ Explicar cuándo usar reglas vs ML en ese dominio
+
+Entregable:
+- Código Python del sistema experto
+- Documento explicando reglas
+- Casos de prueba con resultados
+
+
+
+
+23_EXPERTO_recomendador_flask.py
